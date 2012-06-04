@@ -1,0 +1,71 @@
+<?php
+/**
+ * @file
+ * @author: William Panting
+ * This is the global code for islandora_image_to_HTML_img_viewer
+ */
+
+/**
+ * This function is the hook into the 'islandora viewer sphere' it reports that
+ * this module can handle some image mime types and the theme function to call
+ * to use it.
+ *
+ * @param string $mime_type
+ *   The mime_type that is being queried for
+ *
+ * @return mixed
+ *   array: 'mimetype'=>'theme to call'
+ *   string : 'islandora_image_to_HTML_img'
+ */
+function islandora_image_to_HTML_img_viewer_islandora_viewers($mime_type = NULL) {
+  if ($mime_type == NULL) {
+    return array('image/jpeg' => 'islandora_image_to_HTML_img',
+        'image/png' => 'islandora_image_to_HTML_img',
+        );
+  }
+  elseif ($mime_type == 'application/xml') {
+    return 'islandora_image_to_HTML_img';
+  }
+}
+
+/**
+ * This function makes available the islandora_image_to_HTML_img theme.
+ * The theme will display an HTML unordered list
+ *
+ * @return array
+ *   the themes available from this module
+ */
+function islandora_image_to_HTML_img_viewer_theme() {
+  return array(
+    'islandora_image_to_HTML_img' => array(
+      'arguments' => array(
+        'pid' => NULL,
+        'dsid' => 'SWF',
+      ),
+      'template' => 'islandora_image_to_HTML_img',
+    ),
+  );
+}
+
+/**
+ * This is a preprocessor function that
+ * will prepare to display image data as an HTML image tag.
+ *
+ * It will take the image data and put it in a variable.
+ *
+ * @param array $vars
+ *   The variables to prepare for themeing
+ */
+function islandora_image_to_HTML_img_viewer_preprocess_islandora_image_to_HTML_img(&$vars) {
+  $fedora_pid = $vars['pid'];
+  $dsid = $vars['dsid'];
+  module_load_include('object.inc', 'islandora_fedora_api');
+
+  $Fedora_object = new FedoraObject($fedora_pid);
+  $Fedora_object_datastreams = $Fedora_object->get_datastreams();
+  // Get the image from the datastream.
+  $image_datastream = $Fedora_object_datastreams[$dsid];
+  $image = $image_datastream->__get('content');
+
+  $vars['image_datastream'] = $image;
+}
