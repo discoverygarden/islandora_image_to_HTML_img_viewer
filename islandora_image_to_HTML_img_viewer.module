@@ -19,9 +19,10 @@
  */
 function islandora_image_to_HTML_img_viewer_islandora_viewers($mime_type = NULL) {
   if ($mime_type == NULL) {
-    return array('image/jpeg' => 'islandora_image_to_HTML_img',
-        'image/png' => 'islandora_image_to_HTML_img',
-        );
+    return array(
+      'image/jpeg' => 'islandora_image_to_HTML_img',
+      'image/png' => 'islandora_image_to_HTML_img',
+    );
   }
   elseif ($mime_type == 'application/xml') {
     return 'islandora_image_to_HTML_img';
