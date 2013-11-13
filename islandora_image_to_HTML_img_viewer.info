@@ -1,5 +1,5 @@
-name = Islandora image to HTML img viewer.
-description = Provides an HTML image tag.
+name = "Islandora image to HTML img viewer."
+description = "Provides an HTML image tag."
 package = Islandora Viewers
-version = 6.x-$Format:%h$-dev
-core = 6.x
+version = 7.x-dev
+core = 7.x

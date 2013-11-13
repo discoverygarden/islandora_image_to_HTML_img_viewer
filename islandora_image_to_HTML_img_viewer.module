@@ -6,9 +6,10 @@
  */
 
 /**
- * This function is the hook into the 'islandora viewer sphere' it reports that
- * this module can handle some image mime types and the theme function to call
- * to use it.
+ * This function is the hook into the 'islandora viewer sphere'.
+ *
+ * It reports that this module can handle some image mime types and the theme
+ * function to call to use it.
  *
  * @param string $mime_type
  *   The mime_type that is being queried for
@@ -31,6 +32,7 @@ function islandora_image_to_HTML_img_viewer_islandora_viewers($mime_type = NULL)
 
 /**
  * This function makes available the islandora_image_to_HTML_img theme.
+ *
  * The theme will display an HTML unordered list
  *
  * @return array
@@ -49,8 +51,7 @@ function islandora_image_to_HTML_img_viewer_theme() {
 }
 
 /**
- * This is a preprocessor function that
- * will prepare to display image data as an HTML image tag.
+ * Preprocessor function that prepares image data as an HTML image tag.
  *
  * It will take the image data and put it in a variable.
  *
@@ -58,11 +59,10 @@ function islandora_image_to_HTML_img_viewer_theme() {
  *   The variables to prepare for themeing
  */
 function islandora_image_to_HTML_img_viewer_preprocess_islandora_image_to_HTML_img(&$vars) {
-  $Fedora_PID = $vars['pid'];
-  $DSID = $vars['dsid'];
+  $pid = $vars['pid'];
+  $dsid = $vars['dsid'];
 
-  module_load_include('module', 'fedora_repository');
-  $image_path = "fedora/repository/" . $Fedora_PID . "/" . $DSID;
-  $image_markup = _fedora_repository_render_image($image_path);
+  $params = array('path' => "fedora/repository/" . $pid . "/" . $dsid);
+  $image_markup = theme_image($params);
   $vars['image_datastream'] = $image_markup;
 }
