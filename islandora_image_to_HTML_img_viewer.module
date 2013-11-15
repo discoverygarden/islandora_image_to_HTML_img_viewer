@@ -41,7 +41,7 @@ function islandora_image_to_HTML_img_viewer_islandora_viewers($mime_type = NULL)
 function islandora_image_to_HTML_img_viewer_theme() {
   return array(
     'islandora_image_to_HTML_img' => array(
-      'arguments' => array(
+      'variables' => array(
         'pid' => NULL,
         'dsid' => 'JPG',
       ),
