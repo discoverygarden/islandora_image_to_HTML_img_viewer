@@ -62,7 +62,7 @@ function islandora_image_to_HTML_img_viewer_preprocess_islandora_image_to_HTML_i
   $pid = $vars['pid'];
   $dsid = $vars['dsid'];
 
-  $params = array('path' => "islandora/object/" . $pid . "/datastream/" . $dsid . "/view");
+  $params = array('path' => "islandora/object/" . $pid . "/datastream/" . $dsid . "/view", 'attributes' => array());
   $image_markup = theme_image($params);
   $vars['image_datastream'] = $image_markup;
 }
