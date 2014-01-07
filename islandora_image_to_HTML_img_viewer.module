@@ -67,7 +67,7 @@ function islandora_image_to_HTML_img_viewer_preprocess_islandora_image_to_HTML_i
   $params = array(
       'path' => "islandora/object/" . $pid . "/datastream/" . $dsid . "/view",
       'width' => '100%',
-       'attributes' => array()
+      'attributes' => array()
   );
   $image_markup = theme_image($params);
   $vars['image_datastream'] = $image_markup;
